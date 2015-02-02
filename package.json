@@ -2,7 +2,7 @@
   "name": "flux-commons-store",
   "version": "0.0.2",
   "description": "Base Store class to use with Flux/Dispatcher",
-  "main": "lib/store.js",
+  "main": "dist/store.js",
   "scripts": {
     "test": "jest"
   },
@@ -25,8 +25,11 @@
   ],
   "homepage": "https://github.com/rafaelchiti/flux-commons-store",
   "devDependencies": {
+    "6to5": "^3.3.4",
     "6to5-jest": "^3.0.0",
     "flux": "^2.0.1",
+    "gulp": "^3.8.10",
+    "gulp-6to5": "^3.0.0",
     "jest": "^0.1.37",
     "jest-cli": "^0.2.2"
   },
