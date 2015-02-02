@@ -1,5 +1,5 @@
 {
-  "name": "Flux Commons Store",
+  "name": "flux-commons-store",
   "version": "0.0.1",
   "description": "Base Store class to use with Flux/Dispatcher",
   "main": "index.js",
