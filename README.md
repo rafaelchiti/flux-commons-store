@@ -8,7 +8,7 @@ The missing Store class to use with facebook/flux Dispatcher (https://github.com
 ## Usage
 
 ```js
-var Store = require('flux-commons').Store;
+var Store = require('flux-commons-store');
 var appDispatcher = require('./app_dispatcher');
 var Actions = require('./actions');
 
