@@ -1,12 +1,11 @@
 {
   "name": "flux-commons-store",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Base Store class to use with Flux/Dispatcher",
-  "main": "index.js",
+  "main": "lib/store.js",
   "scripts": {
     "test": "jest"
   },
-  "main": "lib/store.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/rafaelchiti/flux-commons-store.git"
@@ -19,7 +18,11 @@
   "bugs": {
     "url": "https://github.com/rafaelchiti/flux-commons-store/issues"
   },
-  "keywords": ["flux", "store", "dispatcher"],
+  "keywords": [
+    "flux",
+    "store",
+    "dispatcher"
+  ],
   "homepage": "https://github.com/rafaelchiti/flux-commons-store",
   "devDependencies": {
     "6to5-jest": "^3.0.0",
@@ -29,7 +32,14 @@
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/6to5-jest",
-    "testFileExtensions": ["es6", "js"],
-    "moduleFileExtensions": ["js", "json", "es6"]
+    "testFileExtensions": [
+      "es6",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ]
   }
 }
