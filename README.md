@@ -1,7 +1,9 @@
 # Flux Commons Store
 
-Base Store class to use with Flux/Dispatcher from Facebook. The idea is to have a clean
-and simple API to interact with the Facebook Dispatcher and register handlers.
+The missing Store class to use with facebook/flux Dispatcher (https://github.com/facebook/flux).
+
+* NO string matching (no more switch/case with huge constants file full of strings)
+* Smart matching, define one handler and match in a generic fashion multiple actions. (i.e: If ANY 402 status code then do something)
 
 ## Usage
 
