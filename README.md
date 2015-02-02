@@ -6,7 +6,7 @@ and simple API to interact with the Facebook Dispatcher and register handlers.
 ## Usage
 
 ```js
-var Store = require('flux-commons').Store;
+var Store = require('flux-commons-store');
 var appDispatcher = require('./app_dispatcher');
 var Actions = require('./actions');
 
