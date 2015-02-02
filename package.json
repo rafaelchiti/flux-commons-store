@@ -6,12 +6,16 @@
   "scripts": {
     "test": "jest"
   },
+  "main": "lib/store.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/rafaelchiti/flux-commons-store.git"
   },
-  "author": "Rafael F. Chiti",
-  "license": "CC",
+  "author": "Rafael F. Chiti <rafaelchiti@gmail.com>",
+  "license": {
+    "type": "MIT",
+    "url": "http://www.mit-license.org"
+  },
   "bugs": {
     "url": "https://github.com/rafaelchiti/flux-commons-store/issues"
   },
