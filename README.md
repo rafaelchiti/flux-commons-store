@@ -1,4 +1,4 @@
-# Flux Common Store
+# Flux Commons Store
 
 Base Store class to use with Flux/Dispatcher from Facebook. The idea is to have a clean
 and simple API to interact with the Facebook Dispatcher and register handlers.
