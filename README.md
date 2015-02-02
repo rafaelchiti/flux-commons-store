@@ -29,19 +29,16 @@ function handleFetchItemsFail() { ... } // i.e: Show error message
 module.exports = myStore;
 ```
 
-## Matchers
+### Custom matchers
 
 ```js
-listenToActionWithTags (tags, handler, deferExecution) {
- if (! (tags instanceof Array)) {
-   tags = [tags];
- }
 
- var matcher = function(action, params) {
-   var matchedTagsCount = _.intersection(action.tags, tags).length;
-   return matchedTagsCount === tags.length;
- };
-
- this.listenToMatchingAction(matcher,  handler, deferExecution);
+function matcher(action, params) {
+  return params.response.status === 401;
 }
+
+myStore.listenToMatchingAction(matcher, handleUnauthorized);
+
+function handleUnauthorized() { ... } // Delete the token or any other aciton required by your App.
+
 ```
