@@ -1,6 +1,6 @@
 {
   "name": "flux-commons-store",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Base Store class to use with Flux/Dispatcher",
   "main": "dist/store.js",
   "scripts": {
