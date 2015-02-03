@@ -1,88 +1,60 @@
 # Flux Commons Store
 
-Modular, isolated and tested Store class compatible with the facebook/flux dispatcher (https://github.com/facebook/flux).
-
-In contrast with other Flux libraries the idea with flux-commons is to provide small plugable utils/classes or patterns to use in a Flux application.
-
-# About flux-commons-store
-
-Favor object matching and custom matchers over 'String' comparison. When a Flux app starts to grow lots of edge cases end up being very messy and result in a massive amount of strings and constants.
-
-#### This Store has been built to be used with the Facebook/Dispatcher or any other Dispatcher that respect the same interface. ES6 features have been used to build the store, the distribution provided has been transformed to ES5 however we recommend to extend and use it with ES6 classes.
-
-#### IMPORTANT: We restricted the format of the payload dispatched through the Flux/Dispatcher on the way of `{action: action, params: params}`, therefore for this Store to behave properly with listeners and custom matchers we need that actions dispatched through the dispatcher respect that format. (This is going to be change in favor of a flexible approach in the near future).
-
-# Features
-
-* Automatically register the Store with the Dispatcher
-* Provide a simple and user friendly interface to define a handler for an action, as well as particular matchers to listen for an action/s.
-* Provide the interface for registering to changes, unregister and emmit them.
-* Validate common errors when declaring listeners (helpful when developing)
+__Tested__, __Modular__ and __Small__ Flux Store class to use with facebook/flux Dispatcher (https://github.com/facebook/flux).
 
 
-# GOAL
+## Motivation
 
-The idea behind this small module was to be able to have a simple API as follows:
+Migrate from the default proposed 'string' comparison approach:
+```js
+switch(action.actionType) {
+  case TodoConstants.TODO_CREATE:
+    break;
+  case TodoConstants.TODO_DESTROY:
+    break;
+  default:
+    return true
+}
+```
+
+to a simpler and more scalable api like:
 
 ```js
-
-// Match specific actions
+// Async actions
 myStore.listenToAction(Actions.fetchItems, handleFetchingItems);
-
 myStore.listenToAction(Actions.fetchItems.done, handleFetchingItemsDone);
-
 myStore.listenToAction(Actions.fetchItems.fail, handleFetchingItemsFail);
 
 // Generic matchers
 var unauthorizedMatcher = (action, params) => params.response.status === 401;
-
-myStore.listenToMatchingAction(unauthorized, handleUnauthorized);
+myStore.listenToMatchingAction(unauthorizedMatcher, handleUnauthorized);
 ```
 
-# API
+Also provide the suger needed for listening/emiting changes.
+
+## How?
+
+* The Store class expects a 'Dispatcher' on construction time, being the Dispatcher either the facebook/flux one or a custom one respecting the same interface. (more details, on how to use your own, later). `new Store(dispatcher)`
+
+* Matching actions. The Store will automatically register itself with the Dispatcher provided. In order for the Store to know how to match actions, it will expect that the dispatched 'Payloads' have at least a property named `action` that will contain the `action` that we want to match (being an obj or a literal). On the other hand if you want to implement custom matchers based on the params of the payload then the Store will expect a property `params` inside the payload.
+
+
+## Store API
 
 ### `.listenToAction(action, handler)`
-
-- action: Any Object, it will be matched by '==='
-- handler: The function to execute when an action matches the listener..
-
+* `action` any js objcet that will be compared with the `payload.action` object by strict equality.
+* `handler` the function to execute when there is a 'match', `handler(payload)`
 
 ### `.listenToMatchingAction(matcher, handler)`
+* `matcher` a function on the way `matcher(action, params)`. The store will check each dispatched payload with this matcher and execute the handler only when the matcher returns true. The `action` and `params` will be read from the payload.
 
-- matcher: Function that will be used to evaluate the action that is being dispatched. The matcher will receive the `action` and the `parms` when performing the match.
-- handler: The function to execute when an action matches the listener.
+### `.dispatcherToken()`
+* returns the token created by the Dispatcher when registering the callback that listens to all the actions flowing through it.
 
-
-### `.addChangeListener(callback)`
-
-- callback: The callback that will be executed when the Store matches and action and performs a change, by default on any matching action a change event is emitted.
-
-### `.removeChangeListener(callback)`
-
-- callback: The callback to remove from the change listeners attached to the 'change' event on the Store.
-
-### `.emitChange()`
-
-Emits a change event and executes the callbacks registered (if any)
+### `.addChangeListener(cb) .removeChangeListener(cb) .emitChange()`
+* Expose a event like interface to listen to any change event happening on the store. By default every time a handler is executed in the Store a change event will be emitted.
 
 
-# Usage
+## More docs to come.
 
-
-
-#### Creating a new Store.
-
-```js
-var Store = require('flux-commons-store');
-var appDispatcher = require('./app_dispatcher'); // Facebook Dispatcher
-
-class MyStore extends Store {
-  // My custom methods for this store
-}
-
-// The Store will automatically register itself
-// against the Dispatcher provided.
-var myStore = new MyStore(appDispatcher);
-```
-
-## TODO: More examples to come
+For more details please check the tests and the `store.js` the code is very simple and self explanatory.
