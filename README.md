@@ -55,6 +55,10 @@ Also provide the suger needed for listening/emiting changes.
 * Expose a event like interface to listen to any change event happening on the store. By default every time a handler is executed in the Store a change event will be emitted.
 
 
+## Gist with more code and examples
+
+https://gist.github.com/rafaelchiti/915c680b4713c459026d
+
 ## More docs to come.
 
 For more details please check the tests and the `store.js` the code is very simple and self explanatory.
