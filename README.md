@@ -36,22 +36,24 @@ Also provide the suger needed for listening/emiting changes.
 
 * The Store class expects a 'Dispatcher' on construction time, being the Dispatcher either the facebook/flux one or a custom one respecting the same interface. (more details, on how to use your own, later). `new Store(dispatcher)`
 
-* Matching actions. The Store will automatically register itself with the Dispatcher provided. In order for the Store to know how to match actions, it will expect that the dispatched 'Payloads' have at least a property named `action` that will contain the `action` that we want to match (being an obj or a literal). On the other hand if you want to implement custom matchers based on the params of the payload then the Store will expect a property `params` inside the payload.
-
+* Actions. Actions can be anything, the store provides a default impl where it checks for a property 'action' inside the payload to perform the
+matching, by doing strict equality. However you can just send a 'String' to the dispatch and it will work too.
 
 ## Store API
 
-### `.listenToAction(action, handler)`
+(Check the store.js docs for full explanation and complete API)
+
+#### `.listenToAction(action, handler)`
 * `action` any js objcet that will be compared with the `payload.action` object by strict equality.
-* `handler` the function to execute when there is a 'match', `handler(payload)`
+* `handler` the function to execute when there is a 'match', `handler(payload, setSilent)`
 
-### `.listenToMatchingAction(matcher, handler)`
-* `matcher` a function on the way `matcher(action, params)`. The store will check each dispatched payload with this matcher and execute the handler only when the matcher returns true. The `action` and `params` will be read from the payload.
+#### `.listenToMatchingAction(matcher, handler)`
+* `matcher` a function on the way `matcher(payload)`. The store will check each dispatched payload with this matcher and execute the handler only when the matcher returns true.
 
-### `.dispatcherToken()`
+#### `.dispatcherToken()`
 * returns the token created by the Dispatcher when registering the callback that listens to all the actions flowing through it.
 
-### `.addChangeListener(cb) .removeChangeListener(cb) .emitChange()`
+#### `.addChangeListener(cb) .removeChangeListener(cb) .emitChange()`
 * Expose a event like interface to listen to any change event happening on the store. By default every time a handler is executed in the Store a change event will be emitted.
 
 
@@ -61,4 +63,4 @@ https://gist.github.com/rafaelchiti/915c680b4713c459026d
 
 ## More docs to come.
 
-For more details please check the tests and the `store.js` the code is very simple and self explanatory.
+For more details please check the tests and the `store.js` the code is very simple and self explanatory (hopefully).
