@@ -26,7 +26,7 @@ myStore.listenToAction(Actions.fetchItems.done, handleFetchingItemsDone);
 myStore.listenToAction(Actions.fetchItems.fail, handleFetchingItemsFail);
 
 // Generic matchers
-var unauthorizedMatcher = (action, params) => params.response.status === 401;
+var unauthorizedMatcher = (payload) => payload.params.response.status === 401;
 myStore.listenToMatchingAction(unauthorizedMatcher, handleUnauthorized);
 ```
 
@@ -43,17 +43,17 @@ matching, by doing strict equality. However you can just send a 'String' to the 
 
 (Check the store.js docs for full explanation and complete API)
 
-#### `.listenToAction(action, handler)`
+`.listenToAction(action, handler)`
 * `action` any js objcet that will be compared with the `payload.action` object by strict equality.
 * `handler` the function to execute when there is a 'match', `handler(payload, setSilent)`
 
-#### `.listenToMatchingAction(matcher, handler)`
+`.listenToMatchingAction(matcher, handler)`
 * `matcher` a function on the way `matcher(payload)`. The store will check each dispatched payload with this matcher and execute the handler only when the matcher returns true.
 
-#### `.dispatcherToken()`
+`.dispatcherToken()`
 * returns the token created by the Dispatcher when registering the callback that listens to all the actions flowing through it.
 
-#### `.addChangeListener(cb) .removeChangeListener(cb) .emitChange()`
+`.addChangeListener(cb) .removeChangeListener(cb) .emitChange()`
 * Expose a event like interface to listen to any change event happening on the store. By default every time a handler is executed in the Store a change event will be emitted.
 
 
