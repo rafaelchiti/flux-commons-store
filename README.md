@@ -1,5 +1,8 @@
 # Flux Commons Store
 
+
+[![Build Status](https://travis-ci.org/rafaelchiti/flux-commons-store.svg?branch=master)](https://travis-ci.org/rafaelchiti/flux-commons-store)
+
 __Tested__, __Modular__ and __Small__ Flux Store class to use with facebook/flux Dispatcher (https://github.com/facebook/flux).
 
 
