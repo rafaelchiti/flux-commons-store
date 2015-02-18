@@ -135,8 +135,8 @@ function makePayloadHandler() {
     function isAMatch(actionListener, payload) {
       var matcher = actionListener.matcher;
 
-      if (matcher && matcher(payload)) {
-        return true;
+      if (matcher) {
+        return matcher(payload);
       } else {
         return actionListener.action === payload || actionListener.action === payload[actionListener.actionKey];
       }
